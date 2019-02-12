@@ -174,7 +174,7 @@ init(
 		}
 	}
 
-	fs_table_initialise(argc - optind, &argv[optind], nprojopts, projopts);
+	fs_table_initialise(argc - optind, &argv[optind], nprojopts, projopts, 0);
 	free(projopts);
 
 	init_commands();

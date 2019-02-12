@@ -144,7 +144,7 @@ init(
 	pagesize = getpagesize();
 	gettimeofday(&stopwatch, NULL);
 
-	fs_table_initialise(0, NULL, 0, NULL);
+	fs_table_initialise(0, NULL, 0, NULL, 0);
 	while ((c = getopt(argc, argv, "ac:C:dFfiLm:p:PnrRstTVx")) != EOF) {
 		switch (c) {
 		case 'a':

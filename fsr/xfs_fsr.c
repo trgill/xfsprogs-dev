@@ -247,7 +247,7 @@ main(int argc, char **argv)
 	RealUid = getuid();
 
 	pagesize = getpagesize();
-	fs_table_initialise(0, NULL, 0, NULL);
+	fs_table_initialise(0, NULL, 0, NULL, 0);
 	if (optind < argc) {
 		for (; optind < argc; optind++) {
 			argname = argv[optind];

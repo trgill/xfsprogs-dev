@@ -364,6 +364,7 @@ out_nomem:
 static int
 fs_table_initialise_mounts(
 	char		*path)
+	int			xfs_only)
 {
 	struct mntent	*mnt;
 	FILE		*mtp;
@@ -389,6 +390,8 @@ fs_table_initialise_mounts(
 			return errno;
 
 	while ((mnt = getmntent(mtp)) != NULL) {
+		if (xfs_only && strcmp(mnt->mnt_type, "xfs") != 0)
+			continue;
 		if (!realpath(mnt->mnt_dir, rmnt_dir))
 			continue;
 		if (!realpath(mnt->mnt_fsname, rmnt_fsname))
@@ -443,11 +446,12 @@ fs_mount_point_from_path(
 
 static void
 fs_table_insert_mount(
-	char		*mount)
+	char		*mount,
+	int			xfs_only)
 {
 	int		error;
 
-	error = fs_table_initialise_mounts(mount);
+	error = fs_table_initialise_mounts(mount, xfs_only);
 	if (error)
 		fprintf(stderr, _("%s: cannot setup path for mount %s: %s\n"),
 			progname, mount, strerror(error));
@@ -508,23 +512,25 @@ fs_table_insert_project(
  * projects.  If mount_count is zero, mounts is ignored and the
  * table is populated with mounted filesystems.  If project_count is
  * zero, projects is ignored and the table is populated with all
- * projects defined in the projects file.
+ * projects defined in the projects file.  If xfs_only is 1, filter
+ * out non-XFS filesystems.
  */
 void
 fs_table_initialise(
 	int	mount_count,
 	char	*mounts[],
 	int	project_count,
-	char	*projects[])
+	char	*projects[],
+	int	xfs_only)
 {
 	int	error;
 	int	i;
 
 	if (mount_count) {
 		for (i = 0; i < mount_count; i++)
-			fs_table_insert_mount(mounts[i]);
+			fs_table_insert_mount(mounts[i], xfs_only);
 	} else {
-		error = fs_table_initialise_mounts(NULL);
+		error = fs_table_initialise_mounts(NULL, xfs_only);
 		if (error)
 			goto out_error;
 	}

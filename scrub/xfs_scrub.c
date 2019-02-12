@@ -705,7 +705,7 @@ main(
 			mtab = _PATH_MOUNTED;
 	}
 
-	fs_table_initialise(0, NULL, 0, NULL);
+	fs_table_initialise(0, NULL, 0, NULL, 0);
 	fsp = fs_table_lookup_mount(ctx.mntpoint);
 	if (!fsp) {
 		fprintf(stderr, _("%s: Not a XFS mount point.\n"),

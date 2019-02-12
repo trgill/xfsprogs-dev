@@ -37,7 +37,7 @@ extern fs_path_t *fs_table;	/* array of entries in fs table  */
 extern fs_path_t *fs_path;	/* current entry in the fs table */
 extern char *mtab_file;
 
-extern void fs_table_initialise(int, char *[], int, char *[]);
+extern void fs_table_initialise(int, char *[], int, char *[], int);
 extern void fs_table_destroy(void);
 
 extern void fs_table_insert_project_path(char *__dir, uint __projid);

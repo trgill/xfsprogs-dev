@@ -131,7 +131,7 @@ main(int argc, char **argv)
 	if (dflag + lflag + rflag + mflag == 0)
 		aflag = 1;
 
-	fs_table_initialise(0, NULL, 0, NULL);
+	fs_table_initialise(0, NULL, 0, NULL, 0);
 
 	if (!realpath(argv[optind], rpath)) {
 		fprintf(stderr, _("%s: path resolution failed for %s: %s\n"),

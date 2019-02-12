@@ -68,7 +68,7 @@ init(
 	bindtextdomain(PACKAGE, LOCALEDIR);
 	textdomain(PACKAGE);
 
-	fs_table_initialise(0, NULL, 0, NULL);
+	fs_table_initialise(0, NULL, 0, NULL, 0);
 	while ((c = getopt(argc, argv, "c:p:V")) != EOF) {
 		switch (c) {
 		case 'c':

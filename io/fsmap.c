@@ -518,7 +518,7 @@ fsmap_f(
 	 * (We report AG number/block for data device extents on XFS).
 	 */
 	if (!tab_init) {
-		fs_table_initialise(0, NULL, 0, NULL);
+		fs_table_initialise(0, NULL, 0, NULL, 0);
 		tab_init = true;
 	}
 	fs = fs_table_lookup(file->name, FS_MOUNT_POINT);

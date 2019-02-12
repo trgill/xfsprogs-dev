@@ -44,6 +44,7 @@ main(int argc, char **argv)
 	int			error;	/* we have hit an error */
 	long			esize;	/* new rt extent size */
 	int			ffd;	/* mount point file descriptor */
+	int			fflag;	/* -f flag */
 	xfs_fsop_geom_t		geo;	/* current fs geometry */
 	int			iflag;	/* -i flag */
 	int			isint;	/* log is currently internal */
@@ -71,7 +72,7 @@ main(int argc, char **argv)
 
 	maxpct = esize = 0;
 	dsize = lsize = rsize = 0LL;
-	aflag = dflag = iflag = lflag = mflag = nflag = rflag = xflag = 0;
+	aflag = dflag = iflag = fflag = lflag = mflag = nflag = rflag = xflag = 0;
 
 	while ((c = getopt(argc, argv, "dD:e:ilL:m:np:rR:t:xV")) != EOF) {
 		switch (c) {
@@ -84,6 +85,9 @@ main(int argc, char **argv)
 		case 'e':
 			esize = atol(optarg);
 			rflag = 1;
+			break;
+		case 'f':
+			fflag = 1;
 			break;
 		case 'i':
 			lflag = iflag = 1;
